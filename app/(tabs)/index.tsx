@@ -1,16 +1,38 @@
-import { Image, StyleSheet, View} from 'react-native';
-import { Link } from 'expo-router';
+import { StyleSheet, View, Text, FlatList} from 'react-native'
+
+const productos = [
+  {
+  title:"pelota",
+  description:'inmejorable'
+},
+{
+  title:'buzo',
+  description:'muy guay'
+}
+]
+
+type ItemProps = {title: string}
+
+const Item = ({title}: ItemProps) =>(    
+    <View>
+      <Text>{title}</Text>
+    </View>
+)
 
 
 
-
-export default function HomeScreen() {
+const HomeScreen = () => {
   return (
-   <View>ecommerce
-   <Link href='/+not-found'> ver detalles</Link>
+   <View>
+   <FlatList 
+    data={productos}
+    renderItem={({item})=> <Item title={item.title}></Item>}
+
+   />
    </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -30,3 +52,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
+
+
+export default HomeScreen
