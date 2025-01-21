@@ -1,56 +1,59 @@
-import { StyleSheet, View, Text, FlatList} from 'react-native'
+import { useState } from 'react'
+import { StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native'
 
-const productos = [
-  {
-  title:"pelota",
-  description:'inmejorable'
-},
-{
-  title:'buzo',
-  description:'muy guay'
-}
-]
 
-type ItemProps = {title: string}
-
-const Item = ({title}: ItemProps) =>(    
-    <View>
-      <Text>{title}</Text>
-    </View>
-)
+      let producto = {
+        title : document.getElementsByClassName('titleInput'),
+        description: document.getElementsByClassName('descriptionInput'),
+        price: document.getElementsByClassName('priceInput')
+      }
 
 
 
 const HomeScreen = () => {
+  const [title, setTitle] = useState('Titulo')
+  const [description, setDescription] = useState('Descripcion')
+  const [price, setPrice] = useState('Precio')
+
+  const handlePress = () =>{
+    alert('presionado')
+  }
+
+
   return (
    <View>
-   <FlatList 
-    data={productos}
-    renderItem={({item})=> <Item title={item.title}></Item>}
+   <TextInput value={title} placeholder='titulo' style={styles.input} onChangeText={setTitle} className='titleInput'/>
+   <TextInput value={description} style={styles.input} onChangeText={setDescription} className='descriptionInput'/>
+   <TextInput value={price} style={styles.input} onChangeText={setPrice} className='priceInput'/>
 
-   />
+   <TouchableOpacity style={styles.boton} onPress={handlePress}> 
+     <Text>Enviar</Text>
+   </TouchableOpacity>
+   
    </View>
   );
 }
 
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  input:{
+    height: 25,
+    width: 100,
+    borderColor: 'black',
+    borderWidth: 1,
+    marginLeft:50,
+    marginTop:25
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+  boton:{
+    flexDirection: 'column',
+    height: 25,
+    width: 100,
+    borderRadius:15,
+    marginLeft:50,
+    marginTop:25,
+    backgroundColor: 'grey',
+    textDecorationColor: 'white'
+  }
 });
 
 
