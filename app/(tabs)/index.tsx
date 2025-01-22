@@ -1,32 +1,41 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native'
-
-
-      let producto = {
-        title : document.getElementsByClassName('titleInput'),
-        description: document.getElementsByClassName('descriptionInput'),
-        price: document.getElementsByClassName('priceInput')
-      }
 
 
 
 const HomeScreen = () => {
-  const [title, setTitle] = useState('Titulo')
-  const [description, setDescription] = useState('Descripcion')
-  const [price, setPrice] = useState('Precio')
 
-  const handlePress = () =>{
-    alert('presionado')
+  const [producto, setProducto] = useState({title:'',description:'', price:''})
+
+  const handleChange = (key: string, value: string)=>{
+        setProducto((prevProducto)=> ({
+          ...prevProducto,
+          [key]: key === 'price' ? parseFloat(value) || '' : value, 
+        }))
   }
+
+const [mostrarTexto, setMostrarTexto] = useState(false)
+
+const viewText = ()=>{
+ if(mostrarTexto === true){
+  return(
+    producto.title,
+    producto.description,
+    producto.price
+  )
+}
+}
+
+
 
 
   return (
    <View>
-   <TextInput value={title} placeholder='titulo' style={styles.input} onChangeText={setTitle} className='titleInput'/>
-   <TextInput value={description} style={styles.input} onChangeText={setDescription} className='descriptionInput'/>
-   <TextInput value={price} style={styles.input} onChangeText={setPrice} className='priceInput'/>
+   <TextInput placeholder='titulo' style={styles.input} onChangeText={(text)=> handleChange('title', text)} className='titleInput'/>
+   <TextInput style={styles.input} onChangeText={(text)=> handleChange('description', text)}className='descriptionInput'/>
+   <TextInput  style={styles.input} onChangeText={(text)=> handleChange('price', text)} className='priceInput'/>
 
-   <TouchableOpacity style={styles.boton} onPress={handlePress}> 
+   <TouchableOpacity style={styles.boton} onPress={()=>{console.log(viewText())}}> 
      <Text>Enviar</Text>
    </TouchableOpacity>
    
