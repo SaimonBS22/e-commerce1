@@ -16,13 +16,15 @@ const HomeScreen = () => {
 
 const [mostrarTexto, setMostrarTexto] = useState(false)
 
-const viewText = ()=>{
- if(mostrarTexto === true){
+const ViewText = ()=>{
+ if(mostrarTexto == true){
   return(
-    producto.title,
-    producto.description,
-    producto.price
-  )
+    <View>
+      <Text style={styles.texto}>Titulo: {producto.title}</Text>
+      <Text style={styles.texto}>Descripcion: {producto.description}</Text>
+      <Text style={styles.texto}>Precio: {producto.price}</Text>
+    </View>
+  ) 
 }
 }
 
@@ -35,10 +37,10 @@ const viewText = ()=>{
    <TextInput style={styles.input} onChangeText={(text)=> handleChange('description', text)}className='descriptionInput'/>
    <TextInput  style={styles.input} onChangeText={(text)=> handleChange('price', text)} className='priceInput'/>
 
-   <TouchableOpacity style={styles.boton} onPress={()=>{console.log(viewText())}}> 
+   <TouchableOpacity style={styles.boton} onPress={()=>{console.log(setMostrarTexto(true))}}> 
      <Text>Enviar</Text>
    </TouchableOpacity>
-   
+   <ViewText></ViewText>
    </View>
   );
 }
@@ -62,6 +64,9 @@ const styles = StyleSheet.create({
     marginTop:25,
     backgroundColor: 'grey',
     textDecorationColor: 'white'
+  },
+  texto:{
+    marginLeft: 20,
   }
 });
 
