@@ -70,5 +70,8 @@ const styles = StyleSheet.create({
   }
 });
 
+fetch("http://localhost:3030/productos")
+ .then(res => res.json())
+ .then(data => console.log(data))
 
 export default HomeScreen
