@@ -28,6 +28,21 @@ const ViewText = ()=>{
 }
 }
 
+const [productoBack, setProductoBack] = useState([])
+
+useEffect(()=>{
+  const fetchBackend = async () => {
+  try {
+     const response =  await fetch("http://localhost:3030/productos")
+     const data = await response.json()
+     setProductoBack(data)
+ } catch (error) {
+    console.error('Ha ocurrido un error en la llamada a la api', error)
+ }
+}
+fetchBackend()
+},[])
+
 
 
 
@@ -70,8 +85,8 @@ const styles = StyleSheet.create({
   }
 });
 
-fetch("http://localhost:3030/productos")
- .then(res => res.json())
- .then(data => console.log(data))
+// fetch("http://localhost:3030/productos")
+//  .then(res => res.json())
+//  .then(data => console.log(data))
 
 export default HomeScreen
